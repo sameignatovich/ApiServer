@@ -11,6 +11,9 @@ gem 'image_processing', '~> 1.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
+gem 'passenger'
+gem 'faker'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -18,7 +21,9 @@ end
 group :development do
   gem 'listen', '~> 3.3'
   gem 'spring'
-end
 
-gem 'passenger'
-gem 'faker'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rvm'
+end
