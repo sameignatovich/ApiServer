@@ -63,6 +63,7 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     bcrypt (3.1.16)
+    bcrypt_pbkdf (1.1.0)
     bootsnap (1.9.1)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -84,6 +85,7 @@ GEM
       sshkit (~> 1.2)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
+    ed25519 (1.2.4)
     erubi (1.10.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
@@ -183,12 +185,14 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  bcrypt_pbkdf
   bootsnap (>= 1.4.4)
   byebug
   capistrano
   capistrano-passenger
   capistrano-rails
   capistrano-rvm
+  ed25519
   faker
   image_processing (~> 1.2)
   jbuilder (~> 2.7)

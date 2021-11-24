@@ -26,4 +26,6 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
