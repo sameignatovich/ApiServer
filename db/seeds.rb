@@ -24,7 +24,7 @@ puts 'Creating 1000 posts'
 1000.times do
 	Post.create(
 		title: Faker::Lorem.sentence,
-		text: Faker::Lorem.paragraph,
+		text: Faker::Lorem.paragraph(sentence_count: rand(50..100)),
 		user_id: rand(1..100),
 	)
 end
