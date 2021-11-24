@@ -40,6 +40,13 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  # GET /users/1/posts
+  # GET /users/1/posts.json
+  def posts
+    @user = User.find(params[:user_id])
+    @posts = @user.posts
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
