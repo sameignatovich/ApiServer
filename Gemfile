@@ -13,6 +13,7 @@ gem 'rack-cors'
 
 gem 'passenger'
 gem 'faker'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
