@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.page(params[:page]).per(params[:perPage])
+    @posts = Post.includes(:user).page(params[:page]).per(params[:perPage])
     @posts_count = Post.count
   end
 
