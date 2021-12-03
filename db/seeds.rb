@@ -10,7 +10,7 @@ require 'faker'
 
 puts 'Creating 100 users'
 100.times do
-	User.create(
+	user = User.create(
 		username: Faker::Internet.unique.username,
 		email: Faker::Internet.unique.email,
 		phone: Faker::PhoneNumber.cell_phone_with_country_code,
@@ -19,6 +19,17 @@ puts 'Creating 100 users'
 		address: Faker::Address.full_address,
 		password: Faker::Internet.password,
 	)
+
+  img = Avatarly.generate_avatar("User #{user.id}", {
+  	size: 1000,
+  	font_size: 100,
+  	format: 'png',
+  	separator: ''
+  })
+
+  ioObj = StringIO.new(img)
+
+	user.avatar.attach(io: ioObj, filename: "#{user.id}.png", content_type: "image/png")
 end
 
 puts 'Creating 1000 posts'
