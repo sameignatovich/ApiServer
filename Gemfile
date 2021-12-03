@@ -13,6 +13,8 @@ gem 'rack-cors'
 
 gem 'passenger'
 gem 'faker'
+gem 'avatarly'
+gem 'stringio'
 gem 'kaminari'
 
 group :development, :test do
