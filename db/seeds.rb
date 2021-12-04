@@ -8,8 +8,8 @@
 
 require 'faker'
 
-puts 'Creating 100 users'
-100.times do
+puts 'Creating 1.000 users'
+1000.times do
 	user = User.create(
 		username: Faker::Internet.unique.username,
 		email: Faker::Internet.unique.email,
@@ -32,11 +32,21 @@ puts 'Creating 100 users'
 	user.avatar.attach(io: ioObj, filename: "#{user.id}.png", content_type: "image/png")
 end
 
-puts 'Creating 1000 posts'
-1000.times do
+puts 'Creating 10.000 posts'
+10000.times do
 	Post.create(
 		title: Faker::Lorem.sentence,
 		text: Faker::Lorem.paragraph(sentence_count: rand(50..100)),
-		user_id: rand(1..100),
+		user_id: rand(1..1000),
+	)
+end
+
+puts 'Creating 100.000 comments'
+100000.times do
+	Comment.create(
+		body: Faker::Lorem.paragraph,
+		user_id: rand(1..1000),
+		post_id: rand(1..10000),
+		parent_id: :null
 	)
 end
