@@ -3,9 +3,12 @@ Rails.application.routes.draw do
     controller :information do
       get 'information/summary', to: 'information#summary'
     end
-    resources :posts
     resources :users do
       get 'posts', to: 'users#posts'
+    end
+    resources :posts
+    controller :comments do
+      get 'posts/:id/comments', to: 'comments#show'
     end
   end
 end
