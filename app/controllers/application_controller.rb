@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_token
-    #header: { 'Authorization': 'Bearer <token>' }
+    #headers: { 'Authorization': 'Bearer <token>' }
     request.headers['Authorization'].split(' ')[1]
   end
 end
