@@ -22,7 +22,7 @@ class AuthorizationController < ApplicationController
   # DELETE /signout
   # DELETE /signout.json
   def signout
-    token = ApplicationJwt.decode(current_token)
+    token = ActiveJWT.decode(current_token)
     Token.find(token).inactive!
     render json: { signout: true }, status: :ok
   end
