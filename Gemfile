@@ -12,10 +12,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
 gem 'passenger'
+gem 'jwt'
+gem 'kaminari'
 gem 'faker', require: false
 gem 'avatarly', require: false
 gem 'stringio', require: false
-gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

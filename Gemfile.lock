@@ -103,6 +103,7 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.11.3)
       activesupport (>= 5.0.0)
+    jwt (2.3.0)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
@@ -220,6 +221,7 @@ DEPENDENCIES
   faker
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  jwt
   kaminari
   listen (~> 3.3)
   passenger
