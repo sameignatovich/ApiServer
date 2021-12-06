@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :check_authorization, only: %i[ show ]
 
   # GET /posts/:id/comments
   # GET /posts/:id/comments.json
