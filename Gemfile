@@ -12,9 +12,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
 gem 'passenger'
-gem 'faker'
-gem 'avatarly'
-gem 'stringio'
+gem 'faker', require: false
+gem 'avatarly', require: false
+gem 'stringio', require: false
 gem 'kaminari'
 
 group :development, :test do
