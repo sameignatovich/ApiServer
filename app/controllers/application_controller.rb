@@ -1,14 +1,15 @@
 class ApplicationController < ActionController::API
   def check_authorization
-    render json: { message: 'Unauthorized' }, status: :unauthorized unless !!current_user
+    render json: { message: 'Authorization required' }, status: :unauthorized unless !!current_user
   end
 
   def current_user
-    Token.find_by(id: ActiveJWT.decode(current_token), status: :active).user
+    current_token ? Token.find_by(id: ActiveJWT.decode(current_token), status: :active).user : nil
   end
 
   def current_token
     #headers: { 'Authorization': 'Bearer <token>' }
-    request.headers['Authorization'].split(' ')[1]
+    jwt = request.headers['Authorization']
+    jwt ? jwt.split(' ')[1] : nil
   end
 end
