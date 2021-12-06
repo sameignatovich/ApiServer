@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :title, null: false
       t.text :text, null: false
       t.references :user, null: false, foreign_key: true, type: :uuid
-      t.integer :comments_count
+      t.integer :comments_count, null: false, default: 0
 
       t.timestamps
     end

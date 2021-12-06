@@ -9,9 +9,9 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :last_name, null: false
       t.string :address, null: false
       t.string :password_digest, null: false
-      t.integer :tokens_count
-      t.integer :posts_count
-      t.integer :comments_count
+      t.integer :tokens_count, null: false, default: 0
+      t.integer :posts_count, null: false, default: 0
+      t.integer :comments_count, null: false, default: 0
 
       t.timestamps
     end

@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_171937) do
     t.string "title", null: false
     t.text "text", null: false
     t.uuid "user_id", null: false
-    t.integer "comments_count"
+    t.integer "comments_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 2021_12_04_171937) do
     t.string "last_name", null: false
     t.string "address", null: false
     t.string "password_digest", null: false
-    t.integer "tokens_count"
-    t.integer "posts_count"
-    t.integer "comments_count"
+    t.integer "tokens_count", default: 0, null: false
+    t.integer "posts_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
