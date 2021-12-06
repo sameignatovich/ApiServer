@@ -7,6 +7,7 @@ puts 'Creating 1.000 users'
 	user = User.create(
 		username: Faker::Internet.unique.username,
 		email: Faker::Internet.unique.email,
+		role: :regular,
 		phone: Faker::PhoneNumber.cell_phone_with_country_code,
 		first_name: Faker::Name.first_name,
 		last_name: Faker::Name.last_name,
