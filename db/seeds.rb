@@ -8,8 +8,8 @@
 
 require 'faker'
 
-puts 'Creating 1.000 users'
-1000.times do
+=begin
+1000.times do |i|
 	user = User.create(
 		username: Faker::Internet.unique.username,
 		email: Faker::Internet.unique.email,
@@ -20,7 +20,7 @@ puts 'Creating 1.000 users'
 		password: Faker::Internet.password,
 	)
 
-  img = Avatarly.generate_avatar("User #{user.id}", {
+  img = Avatarly.generate_avatar("User #{i+1}", {
   	size: 1000,
   	font_size: 100,
   	format: 'png',
@@ -31,22 +31,26 @@ puts 'Creating 1.000 users'
 
 	user.avatar.attach(io: ioObj, filename: "#{user.id}.png", content_type: "image/png")
 end
+=end
+users_ids = User.ids
 
 puts 'Creating 10.000 posts'
 10000.times do
 	Post.create(
 		title: Faker::Lorem.sentence,
 		text: Faker::Lorem.paragraph(sentence_count: rand(50..100)),
-		user_id: rand(1..1000),
+		user_id: users_ids.sample,
 	)
 end
+
+posts_ids = Post.ids
 
 puts 'Creating 100.000 comments'
 100000.times do
 	Comment.create(
 		body: Faker::Lorem.paragraph,
-		user_id: rand(1..1000),
-		post_id: rand(1..10000),
+		user_id: users_ids.sample,
+		post_id: posts_ids.sample,
 		parent_id: :null
 	)
 end
