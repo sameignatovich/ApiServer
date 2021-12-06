@@ -8,7 +8,7 @@
 
 require 'faker'
 
-=begin
+
 1000.times do |i|
 	user = User.create(
 		username: Faker::Internet.unique.username,
@@ -31,7 +31,7 @@ require 'faker'
 
 	user.avatar.attach(io: ioObj, filename: "#{user.id}.png", content_type: "image/png")
 end
-=end
+
 users_ids = User.ids
 
 puts 'Creating 10.000 posts'
