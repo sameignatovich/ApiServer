@@ -78,8 +78,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_171937) do
     t.string "email", null: false
     t.integer "role", default: 1, null: false
     t.string "phone"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "full_name"
     t.string "address"
     t.string "password_digest", null: false
     t.integer "tokens_count", default: 0, null: false

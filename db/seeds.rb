@@ -9,8 +9,7 @@ puts 'Creating 1.000 users'
 		email: Faker::Internet.unique.email,
 		role: :regular,
 		phone: Faker::PhoneNumber.cell_phone_with_country_code,
-		first_name: Faker::Name.first_name,
-		last_name: Faker::Name.last_name,
+		full_name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
 		address: Faker::Address.full_address,
 		password: Faker::Internet.password,
 	)

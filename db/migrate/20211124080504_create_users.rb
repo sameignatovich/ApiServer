@@ -5,8 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :email, null: false
       t.integer :role, null: false, default: 1
       t.string :phone
-      t.string :first_name
-      t.string :last_name
+      t.string :full_name
       t.string :address
       t.string :password_digest, null: false
       t.integer :tokens_count, null: false, default: 0
