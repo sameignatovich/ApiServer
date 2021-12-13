@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_171937) do
+ActiveRecord::Schema.define(version: 2021_12_13_220718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -65,6 +65,22 @@ ActiveRecord::Schema.define(version: 2021_12_04_171937) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "posts_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "post_id", null: false
+    t.uuid "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_posts_tags_on_post_id"
+    t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
+  end
+
+  create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
   create_table "tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.integer "status", default: 1
@@ -95,5 +111,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_171937) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "posts_tags", "posts"
+  add_foreign_key "posts_tags", "tags"
   add_foreign_key "tokens", "users"
 end
