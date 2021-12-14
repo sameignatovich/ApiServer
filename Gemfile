@@ -14,6 +14,7 @@ gem 'rack-cors'
 gem 'passenger'
 gem 'jwt'
 gem 'kaminari'
+gem 'has_scope'
 gem 'faker', require: false
 gem 'avatarly', require: false
 gem 'stringio', require: false
