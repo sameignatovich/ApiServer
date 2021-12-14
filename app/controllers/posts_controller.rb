@@ -2,24 +2,16 @@ class PostsController < ApplicationController
   before_action :check_authorization
   before_action :set_post, only: %i[ show update destroy ]
   
+  has_scope :username, only: :index
+  has_scope :tag, only: :index
+
   # GET /posts
   # GET /posts.json
   def index
-    query_filters = {}
-
-    if params[:user_id]
-      query_filters['user_id'] = params[:user_id]
-    end
-    if params[:tag]
-      query_filters['tags'] = { name: params[:tag] }
-    end
-
-    @posts = Post.joins(:tags)
-                 .where(query_filters)
-                 .includes(:user)
-                 .page(params[:page] ? params[:page] : 1)
-                 .per(params[:perPage] ? params[:perPage] : 10)
-    @posts_count = Post.count
+    @posts = apply_scopes(Post).includes(:user)
+                               .page(params[:page] ? params[:page] : 1)
+                               .per(params[:perPage] ? params[:perPage] : 10)
+    @posts_count = apply_scopes(Post).count
   end
 
   # GET /posts/1
