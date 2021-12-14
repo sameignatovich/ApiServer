@@ -22,7 +22,7 @@ class AuthorizationController < ApplicationController
   # POST /autologin
   # POST /autologin.json
   def autologin
-    render json: { loggedIn: true }, status: :ok
+    @user = current_user
   end
 
   # DELETE /signout
