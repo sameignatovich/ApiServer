@@ -7,8 +7,8 @@ class AuthorizationController < ApplicationController
     @user = User.find_by_email(user_params[:email])
     if @user && @user.authenticate(user_params[:password])
       if @user.admin?
-        token = @user.tokens.create(status: :active)
-        render json: { token: ActiveJWT.encode(token.id), message: 'Signin successful' }, status: :ok
+        new_token = @user.tokens.create(status: :active)
+        @token = ActiveJWT.encode(new_token.id)
       elsif @user.regular?
         render json: {message: 'Not enough access level'}, status: :unauthorized
       elsif @user.banned?
