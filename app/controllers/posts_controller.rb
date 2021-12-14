@@ -5,7 +5,20 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.includes(:user).page(params[:page]).per(params[:perPage])
+    query_filters = {}
+
+    if params[:user_id]
+      query_filters['user_id'] = params[:user_id]
+    end
+    if params[:tag]
+      query_filters['tags'] = { name: params[:tag] }
+    end
+
+    @posts = Post.joins(:tags)
+                 .where(query_filters)
+                 .includes(:user)
+                 .page(params[:page] ? params[:page] : 1)
+                 .per(params[:perPage] ? params[:perPage] : 10)
     @posts_count = Post.count
   end
 
