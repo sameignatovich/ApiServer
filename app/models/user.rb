@@ -5,4 +5,8 @@ class User < ApplicationRecord
   has_many :tokens, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  default_scope { order(created_at: :desc) }
+
+  scope :role, -> (role) { where(role: role) }
 end

@@ -2,11 +2,14 @@ class UsersController < ApplicationController
   before_action :check_authorization
   before_action :set_user, only: %i[ show update destroy ]
 
+  has_scope :role, only: :index
+
   # GET /users
   # GET /users.json
   def index
-    @users = User.page(params[:page]).per(params[:perPage])
-    @users_count = User.count
+    @users = apply_scopes(User).page(params[:page])
+                               .per(params[:perPage])
+    @users_count = apply_scopes(User).count
   end
 
   # GET /users/1
