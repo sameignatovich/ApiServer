@@ -17,7 +17,7 @@ users_progressbar = ProgressBar.create(title: "Users", format: PROGRESS_FORMAT, 
 	user = User.create(
 		username: Faker::Internet.unique.username,
 		email: Faker::Internet.unique.email,
-		role: [:banned, :regular].sample,
+		role: [:blocked, :regular].sample,
 		phone: Faker::PhoneNumber.cell_phone_with_country_code,
 		full_name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
 		address: Faker::Address.full_address,
