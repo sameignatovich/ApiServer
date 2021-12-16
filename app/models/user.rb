@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum role: [ :banned, :regular, :admin ]
+  enum role: [ :blocked, :regular, :admin ]
   has_one_attached :avatar
   has_secure_password
   has_many :tokens, dependent: :destroy

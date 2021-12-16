@@ -11,8 +11,8 @@ class AuthorizationController < ApplicationController
         @token = ActiveJWT.encode(new_token.id)
       elsif @user.regular?
         render json: {message: 'Access denied'}, status: :unauthorized
-      elsif @user.banned?
-        render json: {message: 'You are banned'}, status: :unauthorized
+      elsif @user.blocked?
+        render json: {message: 'You are blocked'}, status: :unauthorized
       end
     else
       render json: {message: 'Wrong email or password'}, status: :unauthorized
