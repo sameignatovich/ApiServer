@@ -18,6 +18,7 @@ gem 'has_scope'
 gem 'faker', require: false
 gem 'avatarly', require: false
 gem 'stringio', require: false
+gem 'ruby-progressbar', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
