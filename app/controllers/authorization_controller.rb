@@ -10,7 +10,7 @@ class AuthorizationController < ApplicationController
         new_token = @user.tokens.create(status: :active)
         @token = ActiveJWT.encode(new_token.id)
       elsif @user.regular?
-        render json: {message: 'Not enough access level'}, status: :unauthorized
+        render json: {message: 'Access denied'}, status: :unauthorized
       elsif @user.banned?
         render json: {message: 'You are banned'}, status: :unauthorized
       end
