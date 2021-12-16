@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::API
+
+  private
+  
   def check_authorization
     render json: { message: 'Authorization required' }, status: :unauthorized unless !!current_user
   end
