@@ -11,9 +11,8 @@ Rails.application.routes.draw do
     resources :users do
       get 'posts', to: 'users#posts'
     end
-    resources :posts
-    controller :comments do
-      get 'posts/:id/comments', to: 'comments#show'
+    resources :posts do
+      resources :comments
     end
   end
 end
