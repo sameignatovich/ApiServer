@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'Big WTF Info <info@big.wtf>'
-  layout 'mailer'
+  default from: "from@example.com"
+  layout "mailer"
 end
