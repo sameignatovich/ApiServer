@@ -10,18 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_16_024158) do
+ActiveRecord::Schema.define(version: 2021_12_20_200710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.uuid "record_id", null: false
     t.uuid "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: 6, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -33,8 +43,8 @@ ActiveRecord::Schema.define(version: 2021_12_16_024158) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: 6, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -45,10 +55,8 @@ ActiveRecord::Schema.define(version: 2021_12_16_024158) do
   end
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "body", null: false
     t.uuid "user_id", null: false
     t.uuid "post_id", null: false
-    t.uuid "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
@@ -57,7 +65,6 @@ ActiveRecord::Schema.define(version: 2021_12_16_024158) do
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
-    t.text "text", null: false
     t.uuid "user_id", null: false
     t.integer "comments_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -75,8 +82,8 @@ ActiveRecord::Schema.define(version: 2021_12_16_024158) do
   end
 
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.integer "posts_count"
+    t.string "name", null: false
+    t.integer "posts_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
@@ -84,7 +91,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_024158) do
 
   create_table "tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.integer "status", default: 1
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_tokens_on_user_id"
@@ -94,9 +101,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_024158) do
     t.string "username", null: false
     t.string "email", null: false
     t.integer "role", default: 1, null: false
-    t.string "phone"
     t.string "full_name"
-    t.string "address"
     t.string "password_digest", null: false
     t.integer "tokens_count", default: 0, null: false
     t.integer "posts_count", default: 0, null: false
