@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       get 'posts', to: 'users#posts'
     end
     resources :posts do
-      resources :comments
+      resources :comments, only: [:index]
     end
   end
 end
