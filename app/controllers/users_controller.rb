@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :check_authorization
   before_action :set_user, only: %i[ show update destroy ]
 
-  has_scope :role, only: :index
+  has_scope :role, only: %i[ index ]
 
   # GET /users
   # GET /users.json
@@ -45,13 +45,6 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
-  # GET /users/1/posts
-  # GET /users/1/posts.json
-  def posts
-    @user = User.find(params[:user_id])
-    @posts = @user.posts
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -60,6 +53,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email, :first_name, :last_name, :address, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :role, :full_name, :password, :password_confirmation)
     end
 end
