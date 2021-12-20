@@ -1,9 +1,11 @@
 class Post < ApplicationRecord
   belongs_to :user, counter_cache: true
   has_many :comments, dependent: :destroy
-
   has_many :taggings
   has_many :tags, :through => :taggings
+
+  validates :title, presence: true, length: { in: 10..100 }
+  validates :text, presence: true, length: { in: 100..10000 }
 
   def tags_list=(tags)
     self.tags = tags.map do |tag|
