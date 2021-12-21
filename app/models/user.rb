@@ -9,4 +9,8 @@ class User < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   scope :role, -> (role) { where(role: role) }
+
+  def to_param
+    username
+  end
 end
