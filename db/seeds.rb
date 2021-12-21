@@ -18,9 +18,7 @@ users_progressbar = ProgressBar.create(title: "Users", format: PROGRESS_FORMAT, 
     username: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
     role: [:blocked, :regular].sample,
-    phone: Faker::PhoneNumber.cell_phone_with_country_code,
     full_name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
-    address: Faker::Address.full_address,
     password: Faker::Internet.password,
   )
 
@@ -40,9 +38,7 @@ user = User.create(
   username: 'sameignatovich',
   email: 'nikita@ignatovich.me',
   role: :admin,
-  phone: '+375 (29) 655-19-84',
   full_name: 'Nikita Ignatovich',
-  address: '223710 Belarus, Minsk region, Soligorsk',
   password: '557322',
 )
 users_progressbar.finish
@@ -56,7 +52,7 @@ posts_progressbar = ProgressBar.create(title: "Posts", format: PROGRESS_FORMAT, 
 TOTAL_POSTS.times do
   Post.create(
     title: Faker::Lorem.sentence,
-    text: Faker::Lorem.paragraph(sentence_count: rand(50..100)),
+    content: Faker::Lorem.paragraph(sentence_count: rand(100..150)),
     user_id: users_ids.sample,
     tags_list: Faker::Lorem.words(number: 5, supplemental: true)
   )
@@ -71,10 +67,9 @@ comments_progressbar = ProgressBar.create(title: "Comments", format: PROGRESS_FO
 
 TOTAL_COMMENTS.times do
   Comment.create(
-    body: Faker::Lorem.paragraph,
+    content: Faker::Lorem.paragraph,
     user_id: users_ids.sample,
     post_id: posts_ids.sample,
-    parent_id: :null
   )
   comments_progressbar.increment
 end
