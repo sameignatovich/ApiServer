@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def index
     @users = apply_scopes(User).page(params[:page])
                                .per(params[:perPage])
+                               .with_attached_avatar
     @users_count = apply_scopes(User).count
   end
 
