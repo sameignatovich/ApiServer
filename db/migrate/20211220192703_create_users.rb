@@ -1,12 +1,10 @@
-class CreateUsers < ActiveRecord::Migration[6.1]
+class CreateUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :users, id: :uuid do |t|
       t.string :username, null: false
       t.string :email, null: false
       t.integer :role, null: false, default: 1
-      t.string :phone
       t.string :full_name
-      t.string :address
       t.string :password_digest, null: false
       t.integer :tokens_count, null: false, default: 0
       t.integer :posts_count, null: false, default: 0

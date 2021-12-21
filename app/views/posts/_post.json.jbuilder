@@ -1,10 +1,11 @@
-json.extract! post, :id, :title, :text, :comments_count, :created_at
+json.extract! post, :id, :title, :content, :comments_count, :created_at
+json.content post.content.to_s
 
-json.tags do
-  json.array! @tags, partial: "posts/tag", as: :tag
-end
-
-json.author do 
+json.author do
   json.user_id post.user.id
   json.username post.user.username
+end
+
+json.tags do
+  json.array! @tags, partial: "tags/tag", as: :tag
 end

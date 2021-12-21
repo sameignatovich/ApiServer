@@ -7,7 +7,7 @@ class AuthorizationController < ApplicationController
     @user = User.find_by_email(user_params[:email])
     if @user && @user.authenticate(user_params[:password])
       if @user.admin?
-        new_token = @user.tokens.create(status: :active)
+        new_token = @user.tokens.create(active: :true)
         @token = ActiveJWT.encode(new_token.id)
       elsif @user.regular?
         render json: {message: 'Access denied'}, status: :unauthorized
@@ -29,7 +29,7 @@ class AuthorizationController < ApplicationController
   # DELETE /signout.json
   def signout
     token = ActiveJWT.decode(current_token)
-    Token.find(token).inactive!
+    Token.find(token).update(active: false)
     render json: { signout: true }, status: :ok
   end
 

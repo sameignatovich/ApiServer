@@ -8,12 +8,9 @@ Rails.application.routes.draw do
     controller :information do
       get 'information/summary', to: 'information#summary'
     end
-    resources :users do
-      get 'posts', to: 'users#posts'
-    end
-    resources :posts
-    controller :comments do
-      get 'posts/:id/comments', to: 'comments#show'
+    resources :users, param: :username
+    resources :posts do
+      resources :comments, only: [:index]
     end
   end
 end

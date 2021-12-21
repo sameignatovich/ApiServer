@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    current_token ? Token.find_by(id: ActiveJWT.decode(current_token), status: :active).user : nil
+    current_token ? Token.find_by(id: ActiveJWT.decode(current_token), active: :true).user : nil
   end
 
   def current_token

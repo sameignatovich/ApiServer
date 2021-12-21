@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :check_authorization
   before_action :set_post, only: %i[ show update destroy ]
-  
+
   has_scope :username, only: :index
   has_scope :tag, only: :index
 
@@ -56,6 +56,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :text, tags_list: [])
+      params.require(:post).permit(:title, :content, tags_list: [])
     end
 end
