@@ -14,7 +14,7 @@ gem "image_processing", "~> 1.2"
 gem "rack-cors"
 
 gem "passenger"
-gem "sidekiq"
+# gem "sidekiq"
 gem "jwt"
 gem "kaminari"
 gem "has_scope"
