@@ -3,9 +3,9 @@ require 'avatarly'
 require 'stringio'
 require 'ruby-progressbar'
 
-TOTAL_USERS=1000
-TOTAL_POSTS=10000
-TOTAL_COMMENTS=100000
+TOTAL_USERS=100
+TOTAL_POSTS=1000
+TOTAL_COMMENTS=10000
 
 PROGRESS_FORMAT= '%e %P% |%b>%i| %c/%C'
 
