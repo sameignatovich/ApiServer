@@ -30,6 +30,17 @@ class UsersController < ApplicationController
     end
   end
 
+  # PATCH/PUT /users/current
+  # PATCH/PUT /users/current.json
+  def update_current_user
+    @user = current_user
+    if @user.update(user_params)
+      render :show, status: :ok, location: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update

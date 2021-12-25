@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
   defaults format: :json do
+    controller :information do
+      get 'information/summary', to: 'information#summary'
+    end
+
     controller :authorization do
       post 'signin', to: 'signin'
       post 'autologin', to: 'autologin'
       delete 'signout', to: 'signout'
     end
-    controller :information do
-      get 'information/summary', to: 'information#summary'
-    end
+
     resources :users, param: :username
+
+    put 'current/profile', to: 'users#update_current_user'
+    patch 'current/profile', to: 'users#update_current_user'
+
     resources :posts do
       resources :comments, only: [:index]
     end
