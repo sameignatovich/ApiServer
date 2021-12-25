@@ -14,7 +14,7 @@ append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", ".bundle", "storage"
 set :keep_releases, 5
 
-set :rvm_type, :auto
+set :rvm_custom_path, "/usr/share/rvm"
 set :passenger_restart_with_touch, true
 
 namespace :deploy do
@@ -22,7 +22,7 @@ namespace :deploy do
     before :linked_files, :set_master_key_file do
       on roles(:app), in: :sequence, wait: 10 do
         unless test("[ -f #{shared_path}/config/master.key ]")
-          upload! 'config/master.key', "#{shared_path}/config/master.key"
+          upload! "config/master.key", "#{shared_path}/config/master.key"
         end
       end
     end
