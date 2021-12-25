@@ -11,7 +11,7 @@ Rails.configuration.to_prepare do
     end
 
     def prefix
-      spaces_version = "1"
+      spaces_version = "2"
       return "#{ENV["RAILS_ENV"]}_#{spaces_version}"
     end
   end
