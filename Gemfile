@@ -19,6 +19,7 @@ gem "passenger"
 gem "jwt"
 gem "kaminari"
 gem "has_scope"
+gem "user_agent_parser"
 gem "faker", require: false
 gem "avatarly", require: false
 gem "stringio", require: false
