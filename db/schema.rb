@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_12_20_200710) do
     t.string "device"
     t.string "os"
     t.string "browser"
+    t.string "browser_version"
     t.inet "ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

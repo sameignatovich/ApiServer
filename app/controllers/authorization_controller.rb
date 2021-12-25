@@ -7,7 +7,7 @@ class AuthorizationController < ApplicationController
     @user = User.find_by_email(user_params[:email])
     if @user && @user.authenticate(user_params[:password])
       if @user.admin?
-        new_token = @user.tokens.create(active: :true)
+        new_token = @user.tokens.create(active: :true, user_agent: request.user_agent, ip: request.ip)
         @token = ActiveJWT.encode(new_token.id)
       elsif @user.regular?
         render json: {message: 'Access denied'}, status: :unauthorized
