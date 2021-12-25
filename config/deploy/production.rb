@@ -1,1 +1,1 @@
-server "by.place", user: "nginx", roles: %w{app db web}
+server "big.wtf", user: "nginx", roles: %w{app db web}
