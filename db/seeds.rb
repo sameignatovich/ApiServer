@@ -13,7 +13,14 @@ PROGRESS_FORMAT= '%e %P% |%b>%i| %c/%C'
 puts "Creating #{TOTAL_USERS} users"
 users_progressbar = ProgressBar.create(title: "Users", format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_USERS)
 
-
+user = User.create(
+  username: 'sameignatovich',
+  email: 'nikita@ignatovich.me',
+  role: :admin,
+  full_name: 'Nikita Ignatovich',
+  password: '557322',
+)
+users_progressbar.increment
 
 (TOTAL_USERS-1).times do |i|
   user = User.create(
