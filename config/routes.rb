@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
     resources :users, param: :username
 
+    controller :tokens do
+      get 'tokens', to: 'tokens#index'
+    end
+
     put 'current/profile', to: 'users#update_current_user'
     patch 'current/profile', to: 'users#update_current_user'
 
