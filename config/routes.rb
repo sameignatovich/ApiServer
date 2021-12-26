@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     controller :tokens do
       get 'tokens', to: 'tokens#index'
+      delete 'tokens/:id', to: 'tokens#destroy'
     end
 
     put 'current/profile', to: 'users#update_current_user'
