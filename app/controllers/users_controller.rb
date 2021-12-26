@@ -30,14 +30,29 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/current
-  # PATCH/PUT /users/current.json
+  # PATCH/PUT /current/profile
+  # PATCH/PUT /current/profile.json
   def update_current_user
     @user = current_user
     if @user.update(user_params_update_current_user)
       render template: "authorization/autologin", status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /current/password
+  # PATCH/PUT /current/password.json
+  def update_current_user_password
+    @user = current_user
+    if @user.authenticate(user_params_update_current_password[:old_password])
+      if @user.update(user_params_update_current_password.except(:old_password))
+        render json: { updated: true }, status: :ok
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+    else
+      render json: { old_password: ["Wrong current password"] }, status: :unprocessable_entity
     end
   end
 
@@ -68,5 +83,9 @@ class UsersController < ApplicationController
 
     def user_params_update_current_user
       params.require(:user).permit(:email, :full_name)
+    end
+
+    def user_params_update_current_password
+      params.require(:user).permit(:old_password, :password, :password_confirmation)
     end
 end
