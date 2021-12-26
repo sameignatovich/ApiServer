@@ -1,4 +1,3 @@
-json.loggedIn true
 json.token @token
 
 json.user do
