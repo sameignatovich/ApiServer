@@ -1,2 +1,10 @@
-concurrency: 2
 tag: '[ApiServer]'
+
+development:
+  concurrency: 12
+production:
+  concurrency: 2
+queues:
+  - critical
+  - default
+  - low
