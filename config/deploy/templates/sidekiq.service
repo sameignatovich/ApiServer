@@ -1,0 +1,29 @@
+# Customize and copy this to ~/.config/systemd/user
+# Then run:
+#   - systemctl --user enable sidekiq
+#   - systemctl --user {start,stop,restart} sidekiq
+# Then run:
+#   - systemctl enable sidekiq
+#   - systemctl {start,stop,restart} sidekiq
+
+[Unit]
+Description=sidekiq
+After=syslog.target network.target redis-server.service
+
+[Service]
+Type=notify
+WatchdogSec=10
+WorkingDirectory=/home/nginx/www/api.big.wtf/current
+ExecStart=/usr/share/rvm/bin/rvm in /home/nginx/www/api.big.wtf/current do bundle exec sidekiq -e production
+User=nginx
+Group=nginx
+UMask=0002
+Environment=MALLOC_ARENA_MAX=2
+RestartSec=1
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=multi-user.target

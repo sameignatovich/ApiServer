@@ -15,7 +15,7 @@ gem "rack-cors"
 gem "aws-sdk-s3", require: false
 
 gem "passenger"
-# gem "sidekiq"
+gem "sidekiq"
 gem "jwt"
 gem "kaminari"
 gem "has_scope"
@@ -31,9 +31,10 @@ end
 
 group :development do
   gem "capistrano"
+  gem "capistrano-rvm"
   gem "capistrano-rails"
   gem "capistrano-passenger"
-  gem "capistrano-rvm"
+  gem "capistrano-sidekiq"
   gem "ed25519"
   gem "bcrypt_pbkdf"
 end

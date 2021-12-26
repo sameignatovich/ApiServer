@@ -15,7 +15,20 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", ".bundle", "
 set :keep_releases, 5
 
 set :rvm_custom_path, "/usr/share/rvm"
-# set :passenger_restart_with_touch, true
+
+set :sidekiq_roles, :app
+set :sidekiq_default_hooks, true
+set :sidekiq_pid, File.join(shared_path, 'tmp', 'pids', 'sidekiq.pid')
+set :sidekiq_env, "production"
+set :sidekiq_log, File.join(shared_path, 'log', 'sidekiq.log')
+set :sidekiq_config, 'config/sidekiq.yml'
+set :sidekiq_processes, 1 # number of systemd processes you want to start
+set :sidekiq_service_templates_path, 'config/deploy/templates'
+set :sidekiq_service_unit_name, 'sidekiq'
+set :sidekiq_service_unit_user, :user # :system
+set :sidekiq_enable_lingering, true
+set :sidekiq_lingering_user, nil
+set :sidekiq_user, nil #user to run sidekiq as
 
 namespace :deploy do
   namespace :check do
