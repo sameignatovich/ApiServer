@@ -5,6 +5,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  validates :full_name, presence: true
+  validates :username, presence: true
+  validates :email, presence: true
+
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
     attachable.variant :medium, resize_to_limit: [500, 500]

@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/current.json
   def update_current_user
     @user = current_user
-    if @user.update(user_params)
+    if @user.update(user_params_update_current_user)
       render template: "authorization/autologin", status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -58,13 +58,15 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find_by_username(params[:username])
     end
 
-    # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email, :role, :full_name, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :full_name, :password, :password_confirmation)
+    end
+
+    def user_params_update_current_user
+      params.require(:user).permit(:email, :full_name)
     end
 end
