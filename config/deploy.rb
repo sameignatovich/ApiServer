@@ -15,7 +15,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", ".bundle", "
 set :keep_releases, 5
 
 set :rvm_custom_path, "/usr/share/rvm"
-set :passenger_restart_with_touch, true
+# set :passenger_restart_with_touch, true
 
 namespace :deploy do
   namespace :check do
