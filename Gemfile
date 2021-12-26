@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.0"
+ruby "3.0.3"
 
 gem "rails", "~> 7.0.0"
 gem "pg", "~> 1.1"
@@ -21,7 +21,7 @@ gem "kaminari"
 gem "has_scope"
 gem "user_agent_parser", require: false
 gem "faker", require: false
-# gem "avatarly", require: false
+gem "avatarly", require: false
 gem "stringio", require: false
 gem "ruby-progressbar", require: false
 
