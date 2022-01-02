@@ -5,6 +5,9 @@ class Post < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :tags, :through => :taggings
 
+  validates :title, presence: true
+  validates :content, presence: true
+
   def tags_list=(tags)
     self.tags = tags.map do |tag|
       Tag.where(name: tag.strip.downcase).first_or_create!
