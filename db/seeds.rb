@@ -4,14 +4,15 @@ require 'stringio'
 require 'ruby-progressbar'
 
 TOTAL_USERS=100
-TOTAL_POSTS=1000
-TOTAL_COMMENTS=10000
+TOTAL_TOKENS=TOTAL_USERS*10
+TOTAL_POSTS=TOTAL_USERS*10
+TOTAL_COMMENTS=TOTAL_POSTS*10
 
 PROGRESS_FORMAT= '%e %P% |%b>%i| %c/%C'
 
 # ========== USERS ==========
 puts "Creating #{TOTAL_USERS} users"
-users_progressbar = ProgressBar.create(title: "Users", format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_USERS)
+users_progressbar = ProgressBar.create(format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_USERS)
 
 user = User.create(
   username: 'sameignatovich',
@@ -45,9 +46,24 @@ end
 
 users_ids = User.ids
 
+# ========== TOKENS ==========
+puts "Creating #{TOTAL_TOKENS} tokens"
+tokens_progressbar = ProgressBar.create(format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_TOKENS)
+
+TOTAL_TOKENS.times do
+  Token.create(
+    user_id: users_ids.sample,
+    active: [true, false].sample,
+    user_agent: Faker::Internet.user_agent,
+    ip: [Faker::Internet.ip_v6_address, Faker::Internet.ip_v4_address].sample,
+  )
+  tokens_progressbar.increment
+end
+
+
 # ========== POSTS ==========
 puts "Creating #{TOTAL_POSTS} posts"
-posts_progressbar = ProgressBar.create(title: "Posts", format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_POSTS)
+posts_progressbar = ProgressBar.create(format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_POSTS)
 
 TOTAL_POSTS.times do
   Post.create(
@@ -63,7 +79,7 @@ posts_ids = Post.ids
 
 # ========== COMMENTS ==========
 puts 'Creating 100.000 comments'
-comments_progressbar = ProgressBar.create(title: "Comments", format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_COMMENTS)
+comments_progressbar = ProgressBar.create(format: PROGRESS_FORMAT, starting_at: 0, total: TOTAL_COMMENTS)
 
 TOTAL_COMMENTS.times do
   Comment.create(
