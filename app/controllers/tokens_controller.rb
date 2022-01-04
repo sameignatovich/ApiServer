@@ -4,13 +4,13 @@ class TokensController < ApplicationController
   # GET /tokens
   # GET /tokens.json
   def index
-    @tokens = current_user.tokens
+    @tokens = Current.user.tokens
   end
 
   # DELETE /tokens
   # DELETE /tokens.json
   def destroy
-    token = current_user.tokens.find_by(id: params[:id], active: true)
+    token = Current.user.tokens.find_by(id: params[:id], active: true)
     token.update(active: false)
   end
 end

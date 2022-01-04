@@ -22,14 +22,13 @@ class AuthorizationController < ApplicationController
   # POST /autologin
   # POST /autologin.json
   def autologin
-    @user = current_user
+    @user = Current.user
   end
 
   # DELETE /signout
   # DELETE /signout.json
   def signout
-    token = ActiveJWT.decode(current_token)
-    Token.find(token).update(active: false)
+    Token.find(current_token_id).update(active: false)
     render json: { signout: true }, status: :ok
   end
 

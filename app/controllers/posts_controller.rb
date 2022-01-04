@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = current_user.posts.new(post_params)
+    @post = Current.user.posts.new(post_params)
 
     if @post.save
       render :show, status: :created, location: @post
