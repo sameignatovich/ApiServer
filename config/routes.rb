@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
     put 'current/profile', to: 'users#update_current_user'
     patch 'current/profile', to: 'users#update_current_user'
+    put 'current/avatar', to: 'users#update_current_user_avatar'
+    patch 'current/avatar', to: 'users#update_current_user_avatar'
     put 'current/password', to: 'users#update_current_user_password'
     patch 'current/password', to: 'users#update_current_user_password'
 
