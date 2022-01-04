@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :check_authorization
   before_action :set_user, only: %i[ show update destroy ]
-  before_action :set_current_user, only: %i[ update_current_user update_current_user_avatar update_current_user_password ]
 
   has_scope :role, only: %i[ index ]
 
@@ -31,40 +30,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /current/profile
-  # PATCH/PUT /current/profile.json
-  def update_current_user
-    if @user.update(user_params_update_current_user)
-      render template: "authorization/autologin", status: :ok
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /current/avatar
-  # PATCH/PUT /current/avatar.json
-  def update_current_user_avatar
-    if @user.avatar.attach(user_params_update_current_avatar[:avatar])
-      render json: { user: { avatar: polymorphic_url(@user.avatar.variant(:medium)) } }
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /current/password
-  # PATCH/PUT /current/password.json
-  def update_current_user_password
-    if @user.authenticate(user_params_update_current_password[:old_password])
-      if @user.update(user_params_update_current_password.except(:old_password))
-        render json: { updated: true }, status: :ok
-      else
-        render json: @user.errors, status: :unprocessable_entity
-      end
-    else
-      render json: { old_password: ["Wrong current password"] }, status: :unprocessable_entity
-    end
-  end
-
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
@@ -86,23 +51,7 @@ class UsersController < ApplicationController
       @user = User.find_by_username(params[:username])
     end
 
-    def set_current_user
-      @user = current_user
-    end
-
     def user_params
       params.require(:user).permit(:username, :email, :full_name, :password, :password_confirmation)
-    end
-
-    def user_params_update_current_user
-      params.require(:user).permit(:email, :full_name)
-    end
-
-    def user_params_update_current_avatar
-      params.require(:user).permit(:avatar)
-    end
-
-    def user_params_update_current_password
-      params.require(:user).permit(:old_password, :password, :password_confirmation)
     end
 end

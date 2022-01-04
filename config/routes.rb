@@ -13,16 +13,18 @@ Rails.application.routes.draw do
     resources :users, param: :username
 
     controller :tokens do
-      get 'tokens', to: 'tokens#index'
-      delete 'tokens/:id', to: 'tokens#destroy'
+      get 'tokens', action: 'index'
+      delete 'tokens/:id', action: 'destroy'
     end
 
-    put 'current/profile', to: 'users#update_current_user'
-    patch 'current/profile', to: 'users#update_current_user'
-    put 'current/avatar', to: 'users#update_current_user_avatar'
-    patch 'current/avatar', to: 'users#update_current_user_avatar'
-    put 'current/password', to: 'users#update_current_user_password'
-    patch 'current/password', to: 'users#update_current_user_password'
+    controller :settings do
+      put 'settings/profile', action: 'update_profile'
+      patch 'settings/profile', action: 'update_profile'
+      put 'settings/avatar', action: 'update_avatar'
+      patch 'settings/avatar', action: 'update_avatar'
+      put 'settings/password', action: 'update_password'
+      patch 'settings/password', action: 'update_password'
+    end
 
     resources :posts do
       resources :comments, only: [:index]
