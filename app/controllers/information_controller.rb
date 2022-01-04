@@ -5,6 +5,6 @@ class InformationController < ApplicationController
     @posts_count = Post.count
     @last_post = Post.first
     @comments_count = Comment.count
-    @last_comment = Comment.includes(:user).includes(:post).last
+    @last_comment = Comment.last # .includes(:user).includes(:post)
   end
 end
