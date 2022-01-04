@@ -1,4 +1,5 @@
 class SettingsController < ApplicationController
+  before_action :check_authorization
   before_action :set_user
 
   # PATCH/PUT /settings/profile
