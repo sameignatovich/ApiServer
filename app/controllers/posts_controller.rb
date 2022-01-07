@@ -9,8 +9,8 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = apply_scopes(Post).includes(:user)
-                               .page(params[:page] ? params[:page] : 1)
-                               .per(params[:perPage] ? params[:perPage] : 10)
+                               .page(params[:page] || 1)
+                               .per(params[:count] || 10)
     @posts_count = apply_scopes(Post).count
   end
 

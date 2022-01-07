@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = apply_scopes(User).page(params[:page])
-                               .per(params[:perPage])
+    @users = apply_scopes(User).page(params[:page] || 1)
+                               .per(params[:count] || 10)
                                .with_attached_avatar
     @users_count = apply_scopes(User).count
   end
