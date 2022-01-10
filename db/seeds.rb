@@ -69,6 +69,7 @@ TOTAL_POSTS.times do
   Post.create(
     title: Faker::Lorem.sentence,
     content: Faker::Lorem.paragraph(sentence_count: rand(100..150)),
+    status: [:draft, :published, :hidden, :blocked].sample,
     user_id: users_ids.sample,
     tags_list: Faker::Lorem.words(number: 5, supplemental: true)
   )

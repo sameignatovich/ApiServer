@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_12_20_200710) do
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
+    t.integer "status", default: 0, null: false
     t.uuid "user_id", null: false
     t.integer "comments_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
