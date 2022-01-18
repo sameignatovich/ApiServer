@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   defaults format: :json do
-    controller :information do
-      get 'information/summary', to: 'information#summary'
+    controller :statistics do
+      get 'statistics/summary', action: 'summary'
     end
 
     controller :authorization do

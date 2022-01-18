@@ -1,4 +1,4 @@
-class InformationController < ApplicationController
+class StatisticsController < ApplicationController
   def summary
     @users_count = User.count
     @last_user = User.first

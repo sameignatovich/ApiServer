@@ -4,6 +4,7 @@ class Token < ApplicationRecord
   belongs_to :user, counter_cache: true
 
   default_scope { order(updated_at: :desc) }
+  scope :devices, -> { group(:device) }
 
   def user_agent=(ua)
     parsed_agent = UserAgentParser.parse(ua)
