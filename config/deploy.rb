@@ -14,6 +14,7 @@ append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", ".bundle", "storage"
 set :keep_releases, 5
 
+set :rvm_ruby_version, '3.1.0'
 set :rvm_custom_path, "/usr/share/rvm"
 
 set :sidekiq_roles, :app
