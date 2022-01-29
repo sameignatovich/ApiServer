@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     controller :statistics do
       get 'statistics/summary', action: 'summary'
+      get 'statistics/platforms', action: 'platforms'
     end
 
     controller :authorization do

@@ -7,4 +7,9 @@ class StatisticsController < ApplicationController
     @comments_count = Comment.count
     @last_comment = Comment.last # .includes(:user).includes(:post)
   end
+
+  def platforms
+    @devices = Token.unscope(:order).group(:device).count
+    @browsers = Token.unscope(:order).group(:browser).count
+  end
 end
