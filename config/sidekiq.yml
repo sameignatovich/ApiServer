@@ -3,7 +3,7 @@ tag: '[ApiServer]'
 development:
   concurrency: 12
 production:
-  concurrency: 2
+  concurrency: 1
 queues:
   - critical
   - default

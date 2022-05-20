@@ -1,0 +1,10 @@
+/.idea
+/.git
+/log/*
+/tmp/*
+.dockerignore
+.gitattributes
+.gitignore
+.DS_Store
+compose.yml
+Dockerfile

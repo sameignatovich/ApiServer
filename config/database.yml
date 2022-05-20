@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 100 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
 
 development:
   <<: *default
@@ -19,7 +19,8 @@ test:
 
 production:
   <<: *default
+  host: <%= ENV["APISERVER_DATABASE_HOST"] %>
+  port: 5432
   database: apiserver
-  username: bigwtf
-  password: <%= Rails.application.credentials.database_password! %>
-  host: 127.0.0.1
+  username: <%= ENV["APISERVER_DATABASE_USERNAME"] %>
+  password: <%= ENV["APISERVER_DATABASE_PASSWORD"] %>

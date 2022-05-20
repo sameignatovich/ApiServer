@@ -6,10 +6,11 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-digitalocean:
+s3:
   service: S3
-  endpoint: https://fra1.digitaloceanspaces.com
-  access_key_id: <%= Rails.application.credentials.dig(:digitalocean, :access_key) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:digitalocean, :secret) %>
-  bucket: bigwtf
-  region: unused
+  endpoint: https://s3.big.wtf
+  access_key_id: <%= Rails.application.credentials.dig(:s3, :access_key) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:s3, :secret_key) %>
+  bucket: apiserver
+  region: eu-1
+  force_path_style: true

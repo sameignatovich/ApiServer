@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.0"
+ruby "3.1.2"
 
-gem "rails", "~> 7.0.1"
+gem "rails", "~> 7.0.3"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "jbuilder"
@@ -13,7 +13,6 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 gem "rack-cors"
 gem "aws-sdk-s3", require: false
-
 gem "passenger"
 gem "sidekiq"
 gem "jwt"
@@ -37,4 +36,5 @@ group :development do
   gem "capistrano-sidekiq"
   gem "ed25519"
   gem "bcrypt_pbkdf"
+  gem 'rubocop'
 end
