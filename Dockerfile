@@ -1,6 +1,6 @@
 FROM ruby:3.1.2
 RUN apt-get update -qq
-RUN apt-get install -y libpq-dev
+RUN apt-get install -y libpq-dev libvips42
 RUN apt-get clean
 WORKDIR /app
 COPY Gemfile /app/Gemfile
