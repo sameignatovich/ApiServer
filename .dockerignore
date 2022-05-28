@@ -1,6 +1,7 @@
 /.idea
 /.git
 /log/*
+/storage/*
 /tmp/*
 .dockerignore
 .gitattributes
