@@ -1,16 +1,19 @@
 version: '3.8'
 
-x-apiserver-common: &apiserver-common
+x-rails-common: &rails-common
   image: dr.big.wtf/apiserver
   environment:
     RAILS_ENV: production
-    APISERVER_DATABASE_HOST: postgres
     APISERVER_DATABASE_USERNAME: postgres
     APISERVER_DATABASE_PASSWORD: password
+    APISERVER_DATABASE_HOST: postgres
+  depends_on:
+    - postgres
+    - redis
 
 services:
   postgres:
-    image: postgres:14
+    image: postgres:14-alpine
     environment:
       PGDATA: "/pgdata"
       POSTGRES_PASSWORD: password
@@ -20,16 +23,13 @@ services:
       - postgres:/pgdata
 
   redis:
-    image: redis:7
+    image: redis:7-alpine
     deploy:
       replicas: 1
 
   web:
-    <<: *apiserver-common
+    <<: *rails-common
     build: .
-    depends_on:
-      - postgres
-      - redis
     ports:
       - "3002:3000"
     deploy:
@@ -37,10 +37,7 @@ services:
     command: bundle exec rails server -b 0.0.0.0
 
   sidekiq:
-    <<: *apiserver-common
-    depends_on:
-      - postgres
-      - redis
+    <<: *rails-common
     deploy:
       replicas: 12
     command: bundle exec sidekiq -C config/sidekiq.yml

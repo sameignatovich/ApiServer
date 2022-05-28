@@ -1,21 +1,24 @@
-FROM ruby:3.1.2
-RUN apt-get update -qq
-RUN apt-get install -y libpq-dev libvips42
-RUN apt-get clean
+FROM ruby:3.1.2-alpine
+
 WORKDIR /app
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle config set --global deployment true
-RUN bundle config set --global without development:test
-RUN bundle install
 COPY . ./
 
-ENV RAILS_ENV="production"
+RUN apk add --no-cache  \
+    make  \
+    gcc  \
+    libc-dev  \
+    tzdata  \
+    imagemagick  \
+    imagemagick-dev  \
+    imagemagick-libs  \
+    vips \
+    libpq-dev
+RUN bundle config set --global deployment true \
+    && bundle config set --global without development:test  \
+    && bundle install
 
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
 EXPOSE 3000
 
-# Configure the main process to run when running the image
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
